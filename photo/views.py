@@ -1,15 +1,24 @@
 from django.shortcuts import render, redirect
 from .models import Photo
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
-@login_required
+
+'''
 def photo_list(request):
     photos = Photo.objects.all()
     return render(request, 'photo/list.html', {'photos': photos})
+'''
+class PhotoListView(LoginRequiredMixin, ListView):
+    model = Photo
+    template_name = 'photo/list.html'
+    context_object_name = 'photos'
 
+    #def get_queryset(self):
+    #    return Photo.objects.all()
 class PhotoUploadView(LoginRequiredMixin, CreateView):
     model = Photo
     fields = ['photo', 'text']
@@ -30,5 +39,5 @@ class PhotoDeleteView(LoginRequiredMixin, DeleteView):
 
 class PhotoUpdateView(LoginRequiredMixin, UpdateView):
     model = Photo
-    fields = ['Photo', 'text']
+    fields = ['photo', 'text']
     template_name = 'photo/update.html'
