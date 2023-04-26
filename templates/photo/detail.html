@@ -8,6 +8,7 @@
   <div class="col-md-2"></div>
   <div class="col-md-8 panel panel-default">
     <p><img src="{{object.photo.url}}" style="width:100%;"></p>
+    <a href="{% url 'photo:photo_list' %}" class="btn btn-outline-primary btn-sm float-right">Back</a>
     <button type="button" class="btn btn-outline-primary btn-sm">
       {{object.author.username}}
     </button>
